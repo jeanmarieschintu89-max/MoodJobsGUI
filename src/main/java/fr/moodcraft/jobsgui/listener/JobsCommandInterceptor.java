@@ -1,8 +1,8 @@
 package fr.moodcraft.jobsgui.listener;
 
 import fr.moodcraft.jobsgui.Main;
-import fr.moodcraft.jobsgui.gui.JobsListGUI;
 import fr.moodcraft.jobsgui.gui.JobsMainGUI;
+import fr.moodcraft.jobsgui.util.JobsCommandBridge;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +23,7 @@ public class JobsCommandInterceptor implements Listener {
 
         Player player = event.getPlayer();
 
-        if (player.hasPermission("moodjobsgui.bypass")) {
+        if (JobsCommandBridge.isInternalExecution(player)) {
             return;
         }
 
@@ -35,29 +35,15 @@ public class JobsCommandInterceptor implements Listener {
 
         String lower = message.toLowerCase(Locale.ROOT).trim();
 
-        if (!lower.startsWith("/jobs")) {
+        if (!lower.equals("/jobs")
+                && !lower.equals("/jobs browse")
+                && !lower.equals("/jobs join")
+                && !lower.equals("/jobs leave")
+                && !lower.equals("/jobs info")) {
             return;
         }
 
-        String[] parts = lower.split("\\s+");
-
-        if (parts.length == 1
-                || parts[1].equals("browse")
-                || parts[1].equals("join")
-                || parts[1].equals("leave")
-                || parts[1].equals("info")) {
-
-            event.setCancelled(true);
-
-            if (parts.length >= 2
-                    && (parts[1].equals("join")
-                    || parts[1].equals("leave")
-                    || parts[1].equals("info"))) {
-                JobsListGUI.open(player);
-                return;
-            }
-
-            JobsMainGUI.open(player);
-        }
+        event.setCancelled(true);
+        JobsMainGUI.open(player);
     }
 }
