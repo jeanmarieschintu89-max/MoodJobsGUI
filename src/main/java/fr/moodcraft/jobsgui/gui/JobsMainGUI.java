@@ -37,7 +37,8 @@ public final class JobsMainGUI {
             }
 
             lore.add("");
-            lore.add(MoodStyle.lore("Clique pour gérer."));
+            lore.add(MoodStyle.lore("Clique : gérer ce métier."));
+            lore.add(MoodStyle.lore("Ensuite : rejoindre, infos ou quitter."));
 
             inventory.setItem(
                     JOB_SLOTS[i],
@@ -48,19 +49,21 @@ public final class JobsMainGUI {
         inventory.setItem(21, GuiUtil.button(
                 Material.EXPERIENCE_BOTTLE,
                 "Mes Stats",
-                "Voir vos métiers et niveaux."
+                "Clique : voir vos métiers.",
+                "Affiche niveaux et progression."
         ));
 
         inventory.setItem(23, GuiUtil.button(
                 Material.GOLD_INGOT,
                 "Classement",
-                "Voir les meilleurs travailleurs."
+                "Clique : voir le top Jobs.",
+                "Affiche les meilleurs travailleurs."
         ));
 
         inventory.setItem(26, GuiUtil.button(
                 Material.BARRIER,
                 "Fermer",
-                "Retour au jeu."
+                "Clique : fermer le menu."
         ));
 
         GuiUtil.fill(inventory);
