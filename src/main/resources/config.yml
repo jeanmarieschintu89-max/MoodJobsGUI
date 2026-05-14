@@ -1,39 +1,27 @@
 jobs:
   - name: Mineur
-    icon: DIAMOND_PICKAXE
-    command-name: Miner
+    icon: GOLDEN_PICKAXE
+    command-name: Mineur
     description:
-      - Gagnez de l'argent en minant.
-      - Idéal pour les explorateurs souterrains.
+      - Minerais, pierres et souterrains.
+      - Métier simple pour commencer.
   - name: Bûcheron
     icon: DIAMOND_AXE
-    command-name: Woodcutter
+    command-name: Bucheron
     description:
-      - Coupez du bois et développez les forêts.
-      - Simple, stable et utile.
-  - name: Pêcheur
-    icon: FISHING_ROD
-    command-name: Fisherman
+      - Bois, troncs et forêts.
+      - Métier utile pour les builders.
+  - name: Agriculteur
+    icon: WOODEN_HOE
+    command-name: Fermier
     description:
-      - Pêchez pour gagner de l'argent.
-      - Calme et rentable.
-  - name: Fermier
-    icon: WHEAT
-    command-name: Farmer
-    description:
-      - Cultivez, récoltez et nourrissez MoodCraft.
-      - Parfait pour les joueurs paisibles.
+      - Cultures, champs et récoltes.
+      - Métier calme et régulier.
   - name: Chasseur
-    icon: BOW
-    command-name: Hunter
+    icon: IRON_SWORD
+    command-name: Chasseur
     description:
-      - Chassez les créatures hostiles.
-      - Métier actif et dangereux.
-  - name: Constructeur
-    icon: BRICKS
-    command-name: Builder
-    description:
-      - Construisez pour progresser.
-      - Idéal pour les bâtisseurs.
+      - Animaux, monstres et combats.
+      - Métier actif et risqué.
 settings:
   intercept-jobs-command: true
