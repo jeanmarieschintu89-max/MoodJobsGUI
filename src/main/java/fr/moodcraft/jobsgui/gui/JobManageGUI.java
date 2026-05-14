@@ -28,28 +28,29 @@ public final class JobManageGUI {
         inventory.setItem(10, GuiUtil.button(
                 Material.LIME_CONCRETE,
                 "Rejoindre",
-                "Clique pour rejoindre ce métier.",
-                "Tu gagneras argent et XP métier."
+                "Rejoindre ce métier.",
+                "Gagnez argent et XP métier."
         ));
 
         inventory.setItem(13, GuiUtil.button(
                 Material.BOOK,
                 "Infos",
-                "Clique pour voir les gains.",
+                "Voir les gains.",
                 "Argent, XP et actions payées."
         ));
 
         inventory.setItem(16, GuiUtil.button(
                 Material.RED_CONCRETE,
                 "Quitter",
-                "Clique pour quitter ce métier.",
-                "Tu ne gagneras plus d'argent ici."
+                "Quitter ce métier.",
+                "Arrête les gains de ce métier."
         ));
 
         inventory.setItem(22, GuiUtil.button(
-                Material.ARROW,
+                Material.BARRIER,
                 "Retour",
-                "Retour aux métiers."
+                "Retour aux métiers.",
+                "Menu précédent."
         ));
 
         GuiUtil.fill(inventory);
