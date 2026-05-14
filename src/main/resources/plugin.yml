@@ -1,0 +1,33 @@
+name: MoodJobsGUI
+version: 1.0
+main: fr.moodcraft.jobsgui.Main
+api-version: '1.21'
+author: MoodCraft
+description: Interface MoodCraft pour Jobs Reborn
+softdepend:
+  - Jobs
+
+commands:
+  metiers:
+    description: Ouvre le bureau des métiers MoodCraft.
+    usage: /metiers
+    aliases:
+      - métiers
+      - jobsmenu
+      - metier
+      - métier
+  moodjobsgui:
+    description: Administration MoodJobsGUI.
+    usage: /moodjobsgui reload
+    permission: moodjobsgui.admin
+
+permissions:
+  moodjobsgui.use:
+    description: Accès au menu des métiers MoodCraft.
+    default: true
+  moodjobsgui.admin:
+    description: Administration MoodJobsGUI.
+    default: op
+  moodjobsgui.bypass:
+    description: Accès aux commandes Jobs brutes sans redirection GUI.
+    default: op
