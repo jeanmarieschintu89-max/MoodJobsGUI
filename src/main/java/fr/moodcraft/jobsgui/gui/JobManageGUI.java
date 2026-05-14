@@ -28,34 +28,25 @@ public final class JobManageGUI {
         inventory.setItem(10, GuiUtil.button(
                 Material.LIME_CONCRETE,
                 "Rejoindre",
-                "Rejoindre ce métier.",
-                "Action exécutée via Jobs."
+                "Entrer dans ce métier."
         ));
 
-        inventory.setItem(12, GuiUtil.button(
+        inventory.setItem(13, GuiUtil.button(
                 Material.BOOK,
-                "Informations",
-                "Voir les infos du métier.",
-                "Gains, actions et progression."
-        ));
-
-        inventory.setItem(14, GuiUtil.button(
-                Material.RED_CONCRETE,
-                "Quitter",
-                "Quitter ce métier.",
-                "Utilisez avec attention."
+                "Infos",
+                "Voir les gains du métier."
         ));
 
         inventory.setItem(16, GuiUtil.button(
-                Material.EXPERIENCE_BOTTLE,
-                "Statistiques",
-                "Voir votre progression Jobs."
+                Material.RED_CONCRETE,
+                "Quitter",
+                "Quitter ce métier."
         ));
 
         inventory.setItem(22, GuiUtil.button(
                 Material.ARROW,
                 "Retour",
-                "Revenir à la liste des métiers."
+                "Retour aux métiers."
         ));
 
         GuiUtil.fill(inventory);
