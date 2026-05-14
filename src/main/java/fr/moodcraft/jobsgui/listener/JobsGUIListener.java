@@ -2,7 +2,6 @@ package fr.moodcraft.jobsgui.listener;
 
 import fr.moodcraft.jobsgui.Main;
 import fr.moodcraft.jobsgui.gui.JobManageGUI;
-import fr.moodcraft.jobsgui.gui.JobsListGUI;
 import fr.moodcraft.jobsgui.gui.JobsMainGUI;
 import fr.moodcraft.jobsgui.model.JobEntry;
 import fr.moodcraft.jobsgui.util.JobsCommandBridge;
@@ -54,11 +53,6 @@ public class JobsGUIListener implements Listener {
             return;
         }
 
-        if (title.equals(JobsListGUI.TITLE)) {
-            handleList(player, slot);
-            return;
-        }
-
         if (title.startsWith("§6✦ §8§lMétier ")) {
             handleManage(player, title, slot);
         }
@@ -66,38 +60,25 @@ public class JobsGUIListener implements Listener {
 
     private void handleMain(Player player, int slot) {
 
-        switch (slot) {
-            case 10, 28 -> JobsCommandBridge.stats(player);
-            case 12, 30 -> JobsListGUI.open(player);
-            case 14 -> JobsListGUI.open(player);
-            case 16 -> JobsCommandBridge.top(player);
-            case 32 -> sendHelp(player);
-            case 34 -> player.closeInventory();
-            default -> {
-                JobEntry job = findJobByDisplaySlot(slot);
-                if (job != null) {
-                    JobManageGUI.open(player, job);
-                }
-            }
-        }
-    }
-
-    private void handleList(Player player, int slot) {
-
-        if (slot == 45) {
-            JobsMainGUI.open(player);
-            return;
-        }
-
-        if (slot == 49) {
-            player.closeInventory();
-            return;
-        }
-
-        JobEntry job = JobsListGUI.getJobBySlot(slot);
+        JobEntry job = JobsMainGUI.getJobBySlot(slot);
 
         if (job != null) {
             JobManageGUI.open(player, job);
+            return;
+        }
+
+        switch (slot) {
+            case 21 -> {
+                player.closeInventory();
+                JobsCommandBridge.stats(player);
+            }
+            case 23 -> {
+                player.closeInventory();
+                JobsCommandBridge.top(player);
+            }
+            case 26 -> player.closeInventory();
+            default -> {
+            }
         }
     }
 
@@ -105,7 +86,7 @@ public class JobsGUIListener implements Listener {
         String displayName = JobManageGUI.extractJobName(title);
 
         if (displayName == null) {
-            JobsListGUI.open(player);
+            JobsMainGUI.open(player);
             return;
         }
 
@@ -127,35 +108,18 @@ public class JobsGUIListener implements Listener {
                 player.closeInventory();
                 JobsCommandBridge.join(player, job.commandName());
             }
-            case 12 -> {
+            case 13 -> {
                 player.closeInventory();
                 JobsCommandBridge.info(player, job.commandName());
             }
-            case 14 -> {
+            case 16 -> {
                 player.closeInventory();
                 JobsCommandBridge.leave(player, job.commandName());
             }
-            case 16 -> {
-                player.closeInventory();
-                JobsCommandBridge.stats(player);
-            }
-            case 22 -> JobsListGUI.open(player);
+            case 22 -> JobsMainGUI.open(player);
             default -> {
             }
         }
-    }
-
-    private JobEntry findJobByDisplaySlot(int slot) {
-        int[] slots = {37, 38, 39, 40, 41, 42, 43};
-
-        for (int i = 0; i < slots.length; i++) {
-            if (slots[i] == slot
-                    && i < Main.getInstance().getJobConfigManager().getJobs().size()) {
-                return Main.getInstance().getJobConfigManager().getJobs().get(i);
-            }
-        }
-
-        return null;
     }
 
     private JobEntry findJobByName(String displayName) {
@@ -171,19 +135,6 @@ public class JobsGUIListener implements Listener {
     private boolean isMoodJobsTitle(String title) {
         return title != null
                 && (title.equals(JobsMainGUI.TITLE)
-                || title.equals(JobsListGUI.TITLE)
                 || title.startsWith("§6✦ §8§lMétier "));
-    }
-
-    private void sendHelp(Player player) {
-        MoodStyle.send(
-                player,
-                MoodStyle.MODULE,
-                MoodStyle.info("Les métiers récompensent vos activités."),
-                MoodStyle.detail("Mine, pêche, construction, chasse et plus."),
-                MoodStyle.detail("Les gains, niveaux et XP restent gérés par Jobs."),
-                MoodStyle.detail("Utilisez §e/metiers §7pour revenir au menu.")
-        );
-        player.closeInventory();
     }
 }
