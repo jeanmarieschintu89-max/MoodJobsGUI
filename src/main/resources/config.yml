@@ -3,25 +3,34 @@ jobs:
     icon: GOLDEN_PICKAXE
     command-name: Mineur
     description:
-      - Minerais, pierres et souterrains.
-      - Métier simple pour commencer.
+      - Casse des minerais et blocs rares.
+      - Charbon 1€ / Fer 2€ / Or 3€.
+      - Diamant 12€ / Émeraude 15€.
+      - Débris antiques 25€.
   - name: Bûcheron
     icon: DIAMOND_AXE
     command-name: Bucheron
     description:
-      - Bois, troncs et forêts.
-      - Métier utile pour les builders.
+      - Coupe les arbres et tiges du Nether.
+      - Bois classiques 2€.
+      - Acacia 2.2€.
+      - Mangrove, cerisier 3€.
+      - Crimson, warped 4€.
   - name: Agriculteur
     icon: WOODEN_HOE
     command-name: Fermier
     description:
-      - Cultures, champs et récoltes.
-      - Métier calme et régulier.
+      - Cultive et récolte tes champs.
+      - Blé, carottes, patates 1€.
+      - Citrouille, melon, cacao 2€.
+      - Miel et rayon de miel 3€.
   - name: Chasseur
     icon: IRON_SWORD
     command-name: Chasseur
     description:
-      - Animaux, monstres et combats.
-      - Métier actif et risqué.
+      - Tue animaux, monstres et boss.
+      - Animaux 2€ à 4€.
+      - Monstres 4€ à 60€.
+      - Boss et rares 100€ à 450€.
 settings:
   intercept-jobs-command: true
