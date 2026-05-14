@@ -76,7 +76,10 @@ public class JobsGUIListener implements Listener {
                 player.closeInventory();
                 JobsCommandBridge.top(player);
             }
-            case 26 -> player.closeInventory();
+            case 26 -> {
+                player.closeInventory();
+                player.performCommand("menu");
+            }
             default -> {
             }
         }
