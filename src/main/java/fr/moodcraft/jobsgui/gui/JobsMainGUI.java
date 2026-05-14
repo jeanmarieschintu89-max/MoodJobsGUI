@@ -37,8 +37,8 @@ public final class JobsMainGUI {
             }
 
             lore.add("");
-            lore.add(MoodStyle.lore("Clique : gérer ce métier."));
-            lore.add(MoodStyle.lore("Ensuite : rejoindre, infos ou quitter."));
+            lore.add(MoodStyle.lore("Clique pour gérer ce métier."));
+            lore.add(MoodStyle.lore("Argent et XP selon vos actions."));
 
             inventory.setItem(
                     JOB_SLOTS[i],
@@ -49,21 +49,22 @@ public final class JobsMainGUI {
         inventory.setItem(21, GuiUtil.button(
                 Material.EXPERIENCE_BOTTLE,
                 "Mes Stats",
-                "Clique : voir vos métiers.",
-                "Affiche niveaux et progression."
+                "Voir vos métiers et niveaux.",
+                "Argent, XP et progression."
         ));
 
         inventory.setItem(23, GuiUtil.button(
                 Material.GOLD_INGOT,
                 "Classement",
-                "Clique : voir le top Jobs.",
-                "Affiche les meilleurs travailleurs."
+                "Voir le top des travailleurs.",
+                "Classement Jobs."
         ));
 
         inventory.setItem(26, GuiUtil.button(
                 Material.BARRIER,
-                "Fermer",
-                "Clique : fermer le menu."
+                "Menu Principal",
+                "Retour au menu MoodCraft.",
+                "Ouvre /menu."
         ));
 
         GuiUtil.fill(inventory);
