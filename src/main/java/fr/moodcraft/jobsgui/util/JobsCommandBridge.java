@@ -3,9 +3,19 @@ package fr.moodcraft.jobsgui.util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 public final class JobsCommandBridge {
 
+    private static final Set<UUID> INTERNAL_EXECUTION = new HashSet<>();
+
     private JobsCommandBridge() {
+    }
+
+    public static boolean isInternalExecution(Player player) {
+        return player != null && INTERNAL_EXECUTION.contains(player.getUniqueId());
     }
 
     public static void stats(Player player) {
@@ -33,6 +43,20 @@ public final class JobsCommandBridge {
     }
 
     private static void execute(Player player, String command) {
-        Bukkit.dispatchCommand(player, command);
+        if (player == null || command == null || command.isBlank()) {
+            return;
+        }
+
+        INTERNAL_EXECUTION.add(player.getUniqueId());
+
+        try {
+            Bukkit.dispatchCommand(player, command);
+        } finally {
+            Bukkit.getScheduler().runTaskLater(
+                    fr.moodcraft.jobsgui.Main.getInstance(),
+                    () -> INTERNAL_EXECUTION.remove(player.getUniqueId()),
+                    2L
+            );
+        }
     }
 }
