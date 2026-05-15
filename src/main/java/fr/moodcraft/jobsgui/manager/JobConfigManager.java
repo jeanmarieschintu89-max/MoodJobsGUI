@@ -90,11 +90,11 @@ public final class JobConfigManager {
         String clean = clean(raw);
 
         return switch (clean) {
-            case "mineur", "miner" -> "Miner";
-            case "bucheron", "woodcutter" -> "Woodcutter";
-            case "agriculteur", "fermier", "farmer" -> "Farmer";
-            case "chasseur", "hunter" -> "Hunter";
-            default -> raw;
+            case "mineur", "miner" -> "mineur";
+            case "bucheron", "woodcutter" -> "bucheron";
+            case "agriculteur", "fermier", "farmer" -> "fermier";
+            case "chasseur", "hunter" -> "chasseur";
+            default -> clean.isBlank() ? raw : clean.replace(" ", "_");
         };
     }
 
@@ -115,9 +115,9 @@ public final class JobConfigManager {
     }
 
     private void loadFallbackJobs() {
-        jobs.add(new JobEntry("Mineur", "Miner", Material.DIAMOND_PICKAXE, List.of("Gagnez de l'argent en minant.")));
-        jobs.add(new JobEntry("Bûcheron", "Woodcutter", Material.DIAMOND_AXE, List.of("Coupez du bois pour progresser.")));
-        jobs.add(new JobEntry("Agriculteur", "Farmer", Material.WHEAT, List.of("Cultivez et récoltez pour gagner.")));
-        jobs.add(new JobEntry("Chasseur", "Hunter", Material.BOW, List.of("Chassez les créatures hostiles.")));
+        jobs.add(new JobEntry("Mineur", "mineur", Material.DIAMOND_PICKAXE, List.of("Gagnez de l'argent en minant.")));
+        jobs.add(new JobEntry("Bûcheron", "bucheron", Material.DIAMOND_AXE, List.of("Coupez du bois pour progresser.")));
+        jobs.add(new JobEntry("Agriculteur", "fermier", Material.WHEAT, List.of("Cultivez et récoltez pour gagner.")));
+        jobs.add(new JobEntry("Chasseur", "chasseur", Material.BOW, List.of("Chassez les créatures hostiles.")));
     }
 }
