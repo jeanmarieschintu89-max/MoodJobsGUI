@@ -10,7 +10,7 @@ import org.bukkit.inventory.Inventory;
 
 public final class JobManageGUI {
 
-    public static final String TITLE_PREFIX = MoodStyle.guiTitle("Métier ");
+    public static final String TITLE_PREFIX = MoodStyle.cleanTitle(MoodStyle.guiTitle("Métier "));
 
     private JobManageGUI() {
     }
@@ -58,11 +58,13 @@ public final class JobManageGUI {
     }
 
     public static String extractJobName(String title) {
-        String clean = title
-                .replace("§6✦ §8§lMétier ", "")
-                .replace(" §6✦", "")
-                .trim();
+        String clean = MoodStyle.cleanTitle(title);
 
-        return clean.isBlank() ? null : clean;
+        if (!clean.startsWith(TITLE_PREFIX)) {
+            return null;
+        }
+
+        String jobName = clean.substring(TITLE_PREFIX.length()).trim();
+        return jobName.isBlank() ? null : jobName;
     }
 }
