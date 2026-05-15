@@ -1,7 +1,7 @@
 jobs:
   - name: Mineur
     icon: GOLDEN_PICKAXE
-    command-name: Mineur
+    command-name: Miner
     description:
       - Casse des minerais et blocs rares.
       - Charbon 1€ / Fer 2€ / Or 3€.
@@ -9,7 +9,7 @@ jobs:
       - Débris antiques 25€.
   - name: Bûcheron
     icon: DIAMOND_AXE
-    command-name: Bucheron
+    command-name: Woodcutter
     description:
       - Coupe les arbres et tiges du Nether.
       - Bois classiques 2€.
@@ -18,7 +18,7 @@ jobs:
       - Crimson, warped 4€.
   - name: Agriculteur
     icon: WOODEN_HOE
-    command-name: Fermier
+    command-name: Farmer
     description:
       - Cultive et récolte tes champs.
       - Blé, carottes, patates 1€.
@@ -26,7 +26,7 @@ jobs:
       - Miel et rayon de miel 3€.
   - name: Chasseur
     icon: IRON_SWORD
-    command-name: Chasseur
+    command-name: Hunter
     description:
       - Tue animaux, monstres et boss.
       - Animaux 2€ à 4€.
@@ -34,3 +34,4 @@ jobs:
       - Boss et rares 100€ à 450€.
 settings:
   intercept-jobs-command: true
+  normalize-default-jobs-reborn-names: true
