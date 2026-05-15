@@ -6,9 +6,11 @@ import fr.moodcraft.jobsgui.model.JobEntry;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public final class JobConfigManager {
 
@@ -31,6 +33,11 @@ public final class JobConfigManager {
             return;
         }
 
+        boolean normalizeDefaultJobs = plugin.getConfig().getBoolean(
+                "settings.normalize-default-jobs-reborn-names",
+                true
+        );
+
         for (int i = 0; i < list.size(); i++) {
             ConfigurationSection section = plugin.getConfig().getConfigurationSection("jobs." + i);
 
@@ -40,6 +47,11 @@ public final class JobConfigManager {
 
             String name = section.getString("name", "Métier");
             String commandName = section.getString("command-name", name);
+
+            if (normalizeDefaultJobs) {
+                commandName = normalizeJobsRebornName(commandName, name);
+            }
+
             String iconName = section.getString("icon", "BOOK");
             Material icon = Material.matchMaterial(iconName);
 
@@ -69,12 +81,43 @@ public final class JobConfigManager {
         return plugin.getConfig().getBoolean("settings.intercept-jobs-command", true);
     }
 
+    private String normalizeJobsRebornName(String commandName, String displayName) {
+
+        String raw = commandName == null || commandName.isBlank()
+                ? displayName
+                : commandName;
+
+        String clean = clean(raw);
+
+        return switch (clean) {
+            case "mineur", "miner" -> "Miner";
+            case "bucheron", "woodcutter" -> "Woodcutter";
+            case "agriculteur", "fermier", "farmer" -> "Farmer";
+            case "chasseur", "hunter" -> "Hunter";
+            default -> raw;
+        };
+    }
+
+    private String clean(String text) {
+
+        if (text == null) {
+            return "";
+        }
+
+        String normalized = Normalizer.normalize(text, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+
+        return normalized
+                .replaceAll("§.", "")
+                .replace("_", " ")
+                .trim()
+                .toLowerCase(Locale.ROOT);
+    }
+
     private void loadFallbackJobs() {
         jobs.add(new JobEntry("Mineur", "Miner", Material.DIAMOND_PICKAXE, List.of("Gagnez de l'argent en minant.")));
         jobs.add(new JobEntry("Bûcheron", "Woodcutter", Material.DIAMOND_AXE, List.of("Coupez du bois pour progresser.")));
-        jobs.add(new JobEntry("Pêcheur", "Fisherman", Material.FISHING_ROD, List.of("Pêchez et gagnez des récompenses.")));
-        jobs.add(new JobEntry("Fermier", "Farmer", Material.WHEAT, List.of("Cultivez et récoltez pour gagner.")));
+        jobs.add(new JobEntry("Agriculteur", "Farmer", Material.WHEAT, List.of("Cultivez et récoltez pour gagner.")));
         jobs.add(new JobEntry("Chasseur", "Hunter", Material.BOW, List.of("Chassez les créatures hostiles.")));
-        jobs.add(new JobEntry("Constructeur", "Builder", Material.BRICKS, List.of("Construisez pour être récompensé.")));
     }
 }
