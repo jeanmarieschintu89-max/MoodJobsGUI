@@ -45,15 +45,16 @@ public class JobsGUIListener implements Listener {
         }
 
         int slot = event.getSlot();
+        String cleanTitle = MoodStyle.cleanTitle(title);
 
         player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 0.6f, 1.2f);
 
-        if (title.equals(JobsMainGUI.TITLE)) {
+        if (cleanTitle.equals(MoodStyle.cleanTitle(JobsMainGUI.TITLE))) {
             handleMain(player, slot);
             return;
         }
 
-        if (title.startsWith("§6✦ §8§lMétier ")) {
+        if (cleanTitle.startsWith(JobManageGUI.TITLE_PREFIX)) {
             handleManage(player, title, slot);
         }
     }
@@ -127,7 +128,7 @@ public class JobsGUIListener implements Listener {
 
     private JobEntry findJobByName(String displayName) {
         for (JobEntry job : Main.getInstance().getJobConfigManager().getJobs()) {
-            if (job.displayName().equalsIgnoreCase(displayName)) {
+            if (MoodStyle.cleanTitle(job.displayName()).equals(MoodStyle.cleanTitle(displayName))) {
                 return job;
             }
         }
@@ -136,8 +137,9 @@ public class JobsGUIListener implements Listener {
     }
 
     private boolean isMoodJobsTitle(String title) {
-        return title != null
-                && (title.equals(JobsMainGUI.TITLE)
-                || title.startsWith("§6✦ §8§lMétier "));
+        String cleanTitle = MoodStyle.cleanTitle(title);
+
+        return cleanTitle.equals(MoodStyle.cleanTitle(JobsMainGUI.TITLE))
+                || cleanTitle.startsWith(JobManageGUI.TITLE_PREFIX);
     }
 }
