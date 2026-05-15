@@ -2,6 +2,9 @@ package fr.moodcraft.jobsgui.util;
 
 import org.bukkit.command.CommandSender;
 
+import java.text.Normalizer;
+import java.util.Locale;
+
 public final class MoodStyle {
 
     public static final String BRAND = "§aMood§6Craft";
@@ -13,6 +16,23 @@ public final class MoodStyle {
 
     public static String guiTitle(String title) {
         return "§6✦ §8§l" + title + " §6✦";
+    }
+
+    public static String cleanTitle(String title) {
+
+        if (title == null) {
+            return "";
+        }
+
+        String clean = title
+                .replaceAll("§.", "")
+                .replace("✦", "")
+                .trim();
+
+        clean = Normalizer.normalize(clean, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+
+        return clean.toLowerCase(Locale.ROOT).trim();
     }
 
     public static String button(String name) {
