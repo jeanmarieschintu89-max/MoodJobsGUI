@@ -17,7 +17,7 @@ public final class JobsMainGUI {
     public static final String TITLE = MoodStyle.guiTitle("Métiers MoodCraft");
 
     private static final int[] JOB_SLOTS = {
-            10, 12, 14, 16
+            10, 11, 12, 13, 14, 15, 16
     };
 
     private JobsMainGUI() {
