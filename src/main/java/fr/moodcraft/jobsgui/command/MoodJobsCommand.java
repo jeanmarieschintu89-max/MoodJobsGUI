@@ -2,12 +2,15 @@ package fr.moodcraft.jobsgui.command;
 
 import fr.moodcraft.jobsgui.Main;
 import fr.moodcraft.jobsgui.gui.JobsMainGUI;
+import fr.moodcraft.jobsgui.model.JobEntry;
 import fr.moodcraft.jobsgui.util.MoodStyle;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.stream.Collectors;
 
 public class MoodJobsCommand implements CommandExecutor {
 
@@ -43,7 +46,7 @@ public class MoodJobsCommand implements CommandExecutor {
                     player,
                     MoodStyle.MODULE,
                     "Accès refusé.",
-                    MoodStyle.detail("Permission requise : §emoodjobsgui.use")
+                    MoodStyle.detail("Permission requise : moodjobsgui.use")
             );
             return true;
         }
@@ -68,11 +71,20 @@ public class MoodJobsCommand implements CommandExecutor {
 
             plugin.getJobConfigManager().load();
 
+            String loadedJobs = plugin.getJobConfigManager().getJobs().stream()
+                    .map(JobEntry::displayName)
+                    .collect(Collectors.joining(", "));
+
+            if (loadedJobs.isBlank()) {
+                loadedJobs = "aucun";
+            }
+
             MoodStyle.successMessage(
                     sender,
                     MoodStyle.MODULE,
                     "Configuration rechargée.",
-                    MoodStyle.detail("Métiers chargés : §e" + plugin.getJobConfigManager().getJobs().size())
+                    MoodStyle.detail("Métiers chargés : " + plugin.getJobConfigManager().getJobs().size()),
+                    MoodStyle.detail("Liste : " + loadedJobs)
             );
             return true;
         }
@@ -81,8 +93,8 @@ public class MoodJobsCommand implements CommandExecutor {
                 sender,
                 MoodStyle.MODULE,
                 MoodStyle.info("Commandes MoodJobsGUI."),
-                MoodStyle.detail("/metiers §8• §7ouvrir le menu"),
-                MoodStyle.detail("/moodjobsgui reload §8• §7recharger la config")
+                MoodStyle.detail("/metiers - ouvrir le menu"),
+                MoodStyle.detail("/moodjobsgui reload - recharger la config")
         );
         return true;
     }
