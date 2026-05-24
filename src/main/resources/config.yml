@@ -32,6 +32,13 @@ jobs:
       - Animaux 2€ à 4€.
       - Monstres 4€ à 60€.
       - Boss et rares 100€ à 450€.
+  - name: Pêcheur
+    icon: FISHING_ROD
+    command-name: pecheur
+    description:
+      - Pêche poissons, trésors et objets rares.
+      - Gagne de l'argent selon tes prises.
+      - Progression XP selon la rareté.
 settings:
   intercept-jobs-command: true
   normalize-default-jobs-reborn-names: true
